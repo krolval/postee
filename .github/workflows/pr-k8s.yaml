@@ -1,0 +1,21 @@
+name: pr-review
+on:
+  pull_request:
+    paths:
+      - "kubernetes/**"
+  workflow_dispatch:
+jobs:
+  build-test:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: kubernetes
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.1.0
+      - name: Build
+        run: ./deploy-k8s
