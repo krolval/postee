@@ -71,7 +71,7 @@ type PluginSettings struct {
 	DBRemoveOldData int    `json:"Delete_Old_Data"`
 	DBTestInterval  int    `json:"DbVerifyInterval"`
 
-	SizeLimit		int		`json:"SizeLimit"`
+	SizeLimit int `json:"SizeLimit"`
 }
 
 type AlertMgr struct {
