@@ -5,7 +5,13 @@ GO_INSTALL=go install
 GO_CLEAN=go clean
 EXENAME=webhooksrv
 BUILDPATH=$(CURDIR)
-export GOPATH=$(CURDIR)
+
+# Active module mode, as we use Go modules to manage dependencies
+export GO111MODULE=on
+GOPATH=$(shell go env GOPATH)
+GOBIN=$(GOPATH)/bin
+
+SOURCES := $(shell find . -name '*.go')
 
 .PHONY: all clean get build fmt vet test
 
@@ -22,7 +28,7 @@ build :
 
 get :
 	@echo "download 3rd party packages...."
-	@$(GO_GET) github.com/ghodss/yaml github.com/gorilla/mux github.com/andygrunwald/go-jira go.etcd.io/bbolt github.com/spf13/cobra github.com/open-policy-agent/opa/rego
+	@$(GO_INSTALL) github.com/ghodss/yaml github.com/gorilla/mux github.com/andygrunwald/go-jira go.etcd.io/bbolt github.com/spf13/cobra github.com/open-policy-agent/opa/rego
 
 all : makedir get build
 

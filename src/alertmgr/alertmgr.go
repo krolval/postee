@@ -1,8 +1,8 @@
 package alertmgr
 
 import (
-	"dbservice"
 	"fmt"
+	"github.com/aquasecurity/postee"
 	"io/ioutil"
 	"log"
 	"os"
