@@ -44,8 +44,6 @@ jobs:
           VALIDATE_DOCKERFILE: true
           VALIDATE_GO: true
           VALIDATE_MARKDOWN: true
-          VALIDATE_YAML: true
-          YAML_CONFIG_FILE: .yamllint
 
       - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@master
