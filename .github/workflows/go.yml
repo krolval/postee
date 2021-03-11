@@ -34,6 +34,19 @@ jobs:
       - name: Test
         run: make test
 
+      - name: Lint Code Base
+        uses: github/super-linter@v3
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_BASH: true
+          VALIDATE_DOCKERFILE: true
+          VALIDATE_GO: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_YAML: true
+          YAML_CONFIG_FILE: .yamllint
+
       - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@master
         with:
@@ -48,6 +61,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: 'trivy-results.sarif'
-          
+
       - name: Publish Codecov
         run: bash <(curl -s https://codecov.io/bash)
